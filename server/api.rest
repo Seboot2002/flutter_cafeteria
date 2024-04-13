@@ -1,0 +1,86 @@
+POST http://localhost:3700/register
+Content-Type: application/json
+
+{
+    "name": "Bembos",
+    "email": "bembos@email.com",
+    "password": "12345",
+    "code_uni": "20200222",
+    "type": "seller"
+}
+
+###
+
+POST http://localhost:3700/login
+Content-Type: application/json
+
+{
+    "email": "sebas@email.com",
+    "password": "12345",
+    "getToken": true
+}
+
+###DISH
+
+POST http://localhost:3700/saveDish
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MTc0NTI4MiwiZXhwIjoxNjcxODMxNjgyfQ.C6i6x3QumvH4ZW5buVa-gdaMJUw7uHz6-opiZ1fhKXg
+
+{
+    "name": "Pan con queso",
+    "price": 10,
+    "imagePath": "pan-con-queso.png"
+}
+
+###
+
+PUT http://localhost:3700/updateDish/63a4d4b4e0029d2048897841
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MTc0NTI4MiwiZXhwIjoxNjcxODMxNjgyfQ.C6i6x3QumvH4ZW5buVa-gdaMJUw7uHz6-opiZ1fhKXg
+
+{
+    "name": "Pan con queso",
+    "price": 10,
+    "imagePath": "pan-con-queso.png"
+}
+
+###
+
+DELETE http://localhost:3700/deleteDish/63a4d4b4e0029d2048897841
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MTc0NTI4MiwiZXhwIjoxNjcxODMxNjgyfQ.C6i6x3QumvH4ZW5buVa-gdaMJUw7uHz6-opiZ1fhKXg
+
+###
+
+GET http://localhost:3700/getDishes
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjYzg4MWVhZWU0ZDg3YzgyMGFmZiIsImlhdCI6MTY3MjkzMDM2MywiZXhwIjoxNjczMDE2NzYzfQ.GC4SBo7elp1ZwGmpxWy31jFuE2h2mpTNHUEaxls1wF0
+
+###ORDER
+
+POST http://localhost:3700/saveOrder/63a4ceaaa3471c855d903c61/63a4d54464967a73db89e7ef
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjYzg4MWVhZWU0ZDg3YzgyMGFmZiIsImlhdCI6MTY3MzEzMzA4OSwiZXhwIjoxNjczMjE5NDg5fQ.rgquj31ra0CXbdQNLiCOmkZbMajW6Qtv6epJPHjwxV0
+
+###
+
+PUT http://localhost:3700/updateOrder/63a4dc01aff256c28f8f1497
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MTc0NTI4MiwiZXhwIjoxNjcxODMxNjgyfQ.C6i6x3QumvH4ZW5buVa-gdaMJUw7uHz6-opiZ1fhKXg
+
+{
+    "price": 10
+}
+
+###
+
+GET http://localhost:3700/getOrdersSeller
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MzEzMTI4NywiZXhwIjoxNjczMjE3Njg3fQ.QJx3E36bNvc3_yrD1nlghitiCef46nne18XSckFRGzM
+
+###
+
+GET http://localhost:3700/getOrdersCustomer
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjYzg4MWVhZWU0ZDg3YzgyMGFmZiIsImlhdCI6MTY3MzEwODM0NiwiZXhwIjoxNjczMTk0NzQ2fQ.NZ_neLTWvMnvGOE7oX2BRJNV_QQgtsOheWcXbTOEpso
+
+###
+
+DELETE http://localhost:3700/deleteOrder/63a4d73d423f1ad1b2f71cb6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTRjZWFhYTM0NzFjODU1ZDkwM2M2MSIsImlhdCI6MTY3MzEzMTI4NywiZXhwIjoxNjczMjE3Njg3fQ.QJx3E36bNvc3_yrD1nlghitiCef46nne18XSckFRGzM
