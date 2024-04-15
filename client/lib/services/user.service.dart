@@ -6,7 +6,7 @@ const baseUrl = 'http://192.168.0.20:3700'; //Se debe usar la ip del internet ip
 
 class UserService{
   //Future es una clase que nos permite trabajar de manera asincrona
-  Future registerUser(String api, String name, String email, String password, String code_uni, String type) async {
+  Future registerUser(String api, String name, String email, String password, String codeUni, String type) async {
 
     var client = http.Client();
     var url = Uri.parse(baseUrl+api);
@@ -18,7 +18,7 @@ class UserService{
       "name": name,
       "email": email,
       "password": password,
-      "code_uni": code_uni,
+      "code_uni": codeUni,
       "type": type
     }));
 

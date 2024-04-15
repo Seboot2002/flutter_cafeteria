@@ -62,11 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Container( //Container es como un div con sus caracteristicas
             //Hay widgets que estan hechos para contener a otros widgets como 'Container con child' o 'Center con child'
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Image.network('https://www.laespanolaaceites.com/wp-content/uploads/2019/06/pizza-con-chorizo-jamon-y-queso-1080x671.jpg'),
           ),
           Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Image.network('https://www.laespanolaaceites.com/wp-content/uploads/2019/06/pizza-con-chorizo-jamon-y-queso-1080x671.jpg'),
           ),
           Container(
@@ -75,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.center, //Los elementos se centran segun el tamaño en el eje principal, en el caso del row es y
               mainAxisSize: MainAxisSize.max, //El row tendra el tamaño maximo que puede, toda la pantalla
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width*0.5, //Obtengo el tamano with del contexto del widget de Home
-                  child: Text("data1", textAlign: TextAlign.center)
+                  child: const Text("data1", textAlign: TextAlign.center)
                   ),
                 const Text("data2")
               ],
@@ -118,13 +118,13 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 //Puedes crear más widgets que podrás utilizar dentro de otros widgets para ahorrar espacio
-Widget mostrarPulsaciones(_counter) {
+Widget mostrarPulsaciones(counter) {
 
   return Container(
     child: Column(
       children: [
-        Text("Cantidad de veces que presionaste:"),
-        Text('$_counter')
+        const Text("Cantidad de veces que presionaste:"),
+        Text('$counter')
       ],
     ),
   );
@@ -134,7 +134,7 @@ Widget mostrarPulsaciones(_counter) {
 Widget cuerpo() {
   
   return Container(
-    decoration: BoxDecoration(
+    decoration: const BoxDecoration(
       image: DecorationImage(image: NetworkImage("https://fondosmil.com/fondo/70852.jpg"),
       fit: BoxFit.cover
       )
@@ -158,7 +158,7 @@ Widget nombre() {
 Widget CampoEmail() {
 
   return Container(
-    child: TextField(
+    child: const TextField(
       decoration: InputDecoration(
         hintText: 'Email',
         filled: true,

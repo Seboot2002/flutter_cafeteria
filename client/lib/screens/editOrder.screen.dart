@@ -18,7 +18,7 @@ class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     
-    final TextEditingController _stateController = TextEditingController();
+    final TextEditingController stateController = TextEditingController();
     var token = "";
 
     return Scaffold(
@@ -27,24 +27,24 @@ class _EditScreenState extends State<EditScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               "Login",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)
             ),
             DropdownButton(
               items: const [
-                DropdownMenuItem(child: Text('Recibido'), value: 'Recibido'),
-                DropdownMenuItem(child: Text('Preparando'), value: 'Preparando'),
-                DropdownMenuItem(child: Text('Listo'), value: 'Listo'),
+                DropdownMenuItem(value: 'Recibido', child: Text('Recibido')),
+                DropdownMenuItem(value: 'Preparando', child: Text('Preparando')),
+                DropdownMenuItem(value: 'Listo', child: Text('Listo')),
               ],
               onChanged: (String? value) {
 
                 _dropDownValue = value!;
               }),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             ElevatedButton(
-              child: Text('Ingresar'),
+              child: const Text('Ingresar'),
               onPressed: () async {
                 var res = await orderService().updateOrder('token', widget.idOrder, _dropDownValue).then((res) async {
 

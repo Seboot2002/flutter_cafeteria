@@ -12,10 +12,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _codeController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController codeController = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -30,28 +30,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             TextField(
               decoration: const InputDecoration(labelText: 'Name'),
-              controller: _nameController,
+              controller: nameController,
             ),
             const SizedBox(height: 10.0),
             TextField(
               decoration: const InputDecoration(labelText: 'Email'),
-              controller: _emailController,
+              controller: emailController,
             ),
             const SizedBox(height: 10.0),
             TextField(
               decoration: const InputDecoration(labelText: 'Password'),
-              controller: _passwordController,
+              controller: passwordController,
             ),
             const SizedBox(height: 10.0),
             TextField(
               decoration: const InputDecoration(labelText: 'Code'),
-              controller: _codeController,
+              controller: codeController,
             ),
             const SizedBox(height: 10.0),
             ElevatedButton(
-              child: Text('Ingresar'),
+              child: const Text('Ingresar'),
               onPressed: () async {
-                var res = await UserService().registerUser('/register', _nameController.text, _emailController.text, _passwordController.text, _codeController.text, "customer").then((res) {
+                var res = await UserService().registerUser('/register', nameController.text, emailController.text, passwordController.text, codeController.text, "customer").then((res) {
                   
                   print(res);
                 });

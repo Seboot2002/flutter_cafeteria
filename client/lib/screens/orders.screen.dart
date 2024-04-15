@@ -24,9 +24,9 @@ class _OrdersScreenState extends State<OrdersScreen> {
             child: Row(
               children: [
                 Text("${widget.ordersData[index]['dish']['name']}"),
-                SizedBox(width: 10.0,),
+                const SizedBox(width: 10.0,),
                 Text("Cliente: ${widget.ordersData[index]['customer']['name']}"),
-                SizedBox(width: 10.0,),
+                const SizedBox(width: 10.0,),
 
                 TextButton(onPressed: () {
 
@@ -37,7 +37,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
                     print("Order eliminated");
                   });
                 },
-                child: Text('Delete')
+                child: const Text('Delete')
                 ),
               ],
             ),

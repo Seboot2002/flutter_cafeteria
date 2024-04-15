@@ -9,7 +9,7 @@ class orderService{
   Future getOrders(String token) async {
 
     var client = http.Client();
-    var url = Uri.parse(baseUrl+'/getOrdersSeller');
+    var url = Uri.parse('$baseUrl/getOrdersSeller');
     var headers = {'Authorization': token};
     Map dishesData;
     List data;
@@ -32,7 +32,7 @@ class orderService{
   Future createOrder(String token, String sellerId, String dishId) async {
 
     var client = http.Client();
-    var url = Uri.parse(baseUrl+'/saveOrder/'+sellerId+'/'+dishId);
+    var url = Uri.parse('$baseUrl/saveOrder/$sellerId/$dishId');
     var headers = {'Authorization': token};
     Map dishesData;
     List data;
@@ -54,7 +54,7 @@ class orderService{
   Future deleteOrder(String token, String idOrder) async {
 
     var client = http.Client();
-    var url = Uri.parse(baseUrl+'/deleteOrder/'+idOrder);
+    var url = Uri.parse('$baseUrl/deleteOrder/$idOrder');
     var headers = {'Authorization': token};
     Map dishesData;
     List data;
@@ -76,7 +76,7 @@ class orderService{
   Future updateOrder(String token, String orderId, String state) async {
 
     var client = http.Client();
-    var url = Uri.parse(baseUrl+'/saveOrder/'+orderId);
+    var url = Uri.parse('$baseUrl/saveOrder/$orderId');
     var headers = {'Authorization': token};
     Map dishesData;
     List data;

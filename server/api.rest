@@ -15,7 +15,7 @@ POST http://localhost:3700/login
 Content-Type: application/json
 
 {
-    "email": "sebas@email.com",
+    "email": "bembos@email.com",
     "password": "12345",
     "getToken": true
 }

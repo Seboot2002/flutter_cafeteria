@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:app_flutter/services/user.service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,13 +13,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Save_token_preferences(token) async {
+    // Obtain shared preferences.
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Save an String value to 'action' key.
+    await prefs.setString('token', token);
+  }
+
   @override
   Widget build(BuildContext context) {
-
     String name = "";
     String password = "";
-    final TextEditingController _emailController = TextEditingController(); //TextEditingController se modifica segun lo que se agregue o cambie el textField
-    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController emailController =
+        TextEditingController(); //TextEditingController se modifica segun lo que se agregue o cambie el textField
+    final TextEditingController passwordController = TextEditingController();
     String token = "";
 
     return Scaffold(
@@ -27,49 +36,50 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Login",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)
-            ),
+            const Text("Login",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
             TextField(
-              decoration: InputDecoration(labelText: 'Email'),
-              controller: _emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+              controller: emailController,
               onChanged: (value) {
                 name = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             TextField(
-              decoration: InputDecoration(labelText: 'Password'),
-              controller: _passwordController,
+              decoration: const InputDecoration(labelText: 'Password'),
+              controller: passwordController,
               onChanged: (value) {
                 password = value;
               },
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             ElevatedButton(
-              child: Text('Ingresar'),
+              child: const Text('Ingresar'),
               onPressed: () async {
-                var res = await UserService().loginUser('/login', _emailController.text, _passwordController.text, true).then((res) async {
+                var res = await UserService()
+                    .loginUser('/login', emailController.text,
+                        passwordController.text, true)
+                    .then((res) async {
+                  var resData = await UserService().loginUser('/login',
+                      emailController.text, passwordController.text, false);
 
-                  var resData = await UserService().loginUser('/login', _emailController.text, _passwordController.text, false);
+                  var jsondata = jsonDecode(res);
+                  print(jsondata['token']);
+                  Save_token_preferences(jsondata['token']);
 
-                  print(res);
                   Map resDataMap = jsonDecode(resData);
 
-                  if(res == null){
+                  if (res == null) {
                     print("Error");
-                  }
-                  else{
-                    if(resDataMap['type'] == 'customer'){
+                  } else {
+                    if (resDataMap['type'] == 'customer') {
                       Navigator.of(context).popAndPushNamed('/home');
-                    }
-                    else if(resDataMap['type'] == 'seller'){
+                    } else if (resDataMap['type'] == 'seller') {
                       Navigator.of(context).popAndPushNamed('/homeSeller');
                     }
                   }
-
                 });
               },
             ),
