@@ -1,9 +1,12 @@
+import 'package:app_flutter/components/bottom_nav_bar.dart';
+import 'package:app_flutter/const.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_flutter/screens/screens.dart';
 
 import 'package:app_flutter/services/dish.service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,25 +16,69 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   List<dynamic> dishesData = [];
 
-  CallDishes() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token');
+  @override
+  Widget build(BuildContext context) {
 
-    var res = await DishService().getDishes(token!).then((res) {
-      if (res == null) {
-        print("No hay dishes");
-      } else {
-        setState(() {
-          dishesData = List.from(
-              res); //Para copiar la data de una List a otra se usa List.from();
-        });
-        print(dishesData);
-        print("hola xd");
-      }
-    });
+    PageController _pageController = PageController(); //PageController permite controlar la pagina que esta en pageView()
+    
+    //Navigate bottom bar
+    int _paginaActual = 0;
+
+    void navigateBottomBar(int index){
+      this.setState(() {
+        _paginaActual = index;
+        print(_paginaActual);
+      });
+    }
+
+    //pages
+    final List<Widget> _pages = [
+      DishesScreen(dishesData),
+      CartScreen(),
+      //Container(child: Text("Food"), alignment: Alignment.center)
+    ];
+    
+    // UI
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tu cafetería'),
+      ),
+      backgroundColor: backgroundColor,
+      body: PageView(
+        controller: _pageController,
+        children: _pages,
+      ),
+      bottomNavigationBar: MyBottomBar(
+        onTapChangeIndex: (index) {
+          setState(() {
+            _paginaActual = index;
+            print(_paginaActual);
+            _pageController.animateToPage(_paginaActual, duration: Duration(milliseconds: 100), curve: Curves.easeIn); //Permite la transicion
+          });
+          }),
+    );
   }
+
+  CallDishes() async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final String? token = prefs.getString('token');
+
+      var res = await DishService().getDishes(token!).then((res) {
+        if (res == null) {
+          print("No hay dishes");
+        } else {
+          setState(() {
+            dishesData = List.from(
+                res); //Para copiar la data de una List a otra se usa List.from();
+          });
+          print(dishesData);
+          print("hola xd");
+        }
+      });
+    }
 
   //initState se ejecuta antes del build
   @override
@@ -46,44 +93,5 @@ class _HomeScreenState extends State<HomeScreen> {
     super.didUpdateWidget(oldWidget);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    int paginaActual = 0;
-    PageController pageController =
-        PageController(); //PageController permite controlar la pagina que esta en pageView()
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tu cafetería - customer'),
-      ),
-      body: PageView(
-        controller: pageController,
-        children: [
-          //Aqui agregamos las paginas
-          DishesScreen(dishesData),
-          Container(alignment: Alignment.center, child: const Text("Food")),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: paginaActual, //Es el index del array 'items'
-        items: const [
-          //Este array solo pide widgets de tipo BottomNavigationBarItem
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.food_bank), label: 'Food'),
-        ],
-        selectedItemColor: Colors.blue,
-        onTap: (index) {
-          //Se ejecuta al darle tap a un item y devuelve un valor int a esta funcion, el index
-
-          setState(() {
-            paginaActual = index;
-          });
-          //_pageController.jumpToPage(_paginaActual);
-          pageController.animateToPage(paginaActual,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeIn);
-        },
-      ),
-    );
-  }
 }

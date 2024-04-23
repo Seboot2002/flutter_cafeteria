@@ -32,10 +32,10 @@ class UserService{
     }
   }
 
-  Future loginUser(String api, String email, String password, bool getToken) async {
+  Future loginUser(String email, String password, bool getToken) async {
 
     var client = http.Client();
-    var url = Uri.parse(baseUrl+api);
+    var url = Uri.parse(baseUrl+'/login');
 
     //una peticion es de tipo Response
     var response = await client.post(url,

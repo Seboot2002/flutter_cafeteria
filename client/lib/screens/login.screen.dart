@@ -59,26 +59,24 @@ class _LoginScreenState extends State<LoginScreen> {
               child: const Text('Ingresar'),
               onPressed: () async {
                 var res = await UserService()
-                    .loginUser('/login', emailController.text,
-                        passwordController.text, true)
-                    .then((res) async {
-                  var resData = await UserService().loginUser('/login',
-                      emailController.text, passwordController.text, false);
+                  .loginUser(emailController.text, passwordController.text, true).then((res) async {
+                    var resData = await UserService().loginUser(emailController.text, passwordController.text, false);
 
-                  var jsondata = jsonDecode(res);
-                  print(jsondata['token']);
-                  Save_token_preferences(jsondata['token']);
+                    var jsondata = jsonDecode(res);
+                    print(jsondata['token']);
+                    Save_token_preferences(jsondata['token']);
 
                   Map resDataMap = jsonDecode(resData);
 
                   if (res == null) {
                     print("Error");
                   } else {
-                    if (resDataMap['type'] == 'customer') {
+                    Navigator.of(context).popAndPushNamed('/home');
+                    /*if (resDataMap['type'] == 'customer') {
                       Navigator.of(context).popAndPushNamed('/home');
                     } else if (resDataMap['type'] == 'seller') {
                       Navigator.of(context).popAndPushNamed('/homeSeller');
-                    }
+                    }*/
                   }
                 });
               },
