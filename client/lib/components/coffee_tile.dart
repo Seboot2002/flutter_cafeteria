@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/coffee.dart';
 
+// ignore: must_be_immutable
 class CoffeeTile extends StatelessWidget {
   final Coffee coffee;
   void Function()? onPressed;

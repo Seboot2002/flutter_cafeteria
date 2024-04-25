@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+// ignore: must_be_immutable
 class MyBottomBar extends StatelessWidget {
   void Function(int)? onTapChangeIndex; //Puedo crear funciones del elemento para pasar data de arriba a abajo. Externo a interno.
   MyBottomBar({super.key, required this.onTapChangeIndex,});
@@ -15,7 +16,7 @@ class MyBottomBar extends StatelessWidget {
         tabBackgroundColor: Colors.grey.shade300,
         tabBorderRadius: 24,
         tabActiveBorder: Border.all(color: Colors.white),
-        tabs: [
+        tabs: const [
           GButton(
             icon: Icons.home, 
             text: "Shop"

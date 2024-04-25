@@ -6,38 +6,39 @@ class CoffeeShop extends ChangeNotifier{
     Coffee(
         name: 'Long Black',
         price: "4.10",
-        imagePath: 'lib/images/blackcoffee.png'
+        imagePath: 'lib/assets/images/black.png'
     ),
         
     Coffee(
       name: 'Latte', 
       price: "4.20", 
-      imagePath: 'lib/images/latte.png'
+      imagePath: 'lib/assets/images/tea.png'
       ),
     Coffee(
         name: 'Espresso', 
         price: "4.00", 
-         imagePath: 'lib/images/Espresso.png'
+         imagePath: 'lib/assets/images/espresso.png'
          ),
     Coffee(
         name: 'Cappuccino',
         price: '4.50',
-        imagePath: 'lib/images/cappuccino.png'
+        imagePath: 'lib/assets/images/iced_coffee.png'
         ),
   ];
   //coffee for sale
   List<Coffee> _userCard = [];
-  //user card
-  List<Coffee> get coffeeShop => _shop;
+
+  //user card:
 
   //get coffee list
+  List<Coffee> get coffeeShop => _shop;
 
   //get user card
   List<Coffee> get userCard => _userCard;
   //add item to card
   void addItemToCard(Coffee coffee){
     _userCard.add(coffee);
-    notifyListeners();
+    notifyListeners(); //Notificamos que se produjo un cambio al Listener
   }
   //remove item to card
   void removeItemFromCard(Coffee coffee){
