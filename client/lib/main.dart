@@ -1,3 +1,4 @@
+import 'package:app_flutter/screens/order.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app_flutter/screens/screens.dart';
 import 'package:provider/provider.dart';//Aqui importamos todos los screens para ahorrar espacio
@@ -15,15 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: ((context) => CoffeeShop()),
-      builder: (context, child) => const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: HomeScreen() /*const MyHomePage(title: 'Flutter Demo Home Page')*/,
-      /*routes: {
-        '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegisterScreen(),
-        '/home': (context) => const HomeScreen(),
-      },*/
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        home: HomeScreen(), /*const MyHomePage(title: 'Flutter Demo Home Page')*/
+        routes: {
+          '/home': (context) => HomeScreen(),
+          '/shop': (context) => ShopScreen(),
+          '/cart': (context) => CartScreen(),
+        },
       )
     );
   }

@@ -1,5 +1,6 @@
 import 'package:app_flutter/models/coffee.dart';
 import 'package:app_flutter/models/coffee_shop.dart';
+import 'package:app_flutter/screens/order.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:app_flutter/components/coffee_tile.dart';
@@ -24,6 +25,14 @@ class _ShopScreenState extends State<ShopScreen> {
         title: Text("Añadido a su carrito!"),
       ),
     );
+  }
+
+  void goToOrderPage(Coffee coffee){
+    //navigate to order page
+    Navigator.push(context, 
+    MaterialPageRoute(
+      builder: ((context) => OrderScreen(coffee: coffee))
+    ));
   }
 
   @override
@@ -55,6 +64,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       coffee: eachCoffee,
                       icon: const Icon(Icons.add),
                       onPressed: () => addToCart(eachCoffee),
+                      onTap: () => goToOrderPage(eachCoffee)
                       );
 
                   }

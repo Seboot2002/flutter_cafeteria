@@ -45,4 +45,9 @@ class CoffeeShop extends ChangeNotifier{
     _userCard.remove(coffee);
     notifyListeners();
   }
+
+  void removeAllItems(){
+    _userCard = [];
+    notifyListeners();
+  }
 }
